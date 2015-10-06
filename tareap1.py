@@ -47,7 +47,7 @@ ax1 = fig.add_subplot(211)
 ax1.set_xlabel('y')
 ax1.set_ylabel('dy/ds')
 ax1.set_xlim(-3,4)
-plt.title("Trayectoria en espacio (y,dy/ds) oscilado de Van der Pool")
+plt.title("Trayectoria en espacio (y,dy/ds) oscilador de Van der Pool")
 
 #primeras condiciones iniciales
 x1[0]= 0.1
