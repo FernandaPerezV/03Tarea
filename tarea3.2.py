@@ -17,7 +17,7 @@ fig = plt.figure(1)
 fig.clf()
 
 ax = fig.add_subplot(111, projection='3d')
-ax.set_aspect('equal')
+ax.set_aspect('auto')
 
 def f_a_integrar(t,w,s=sigma,r=rho,b=beta):
     x, y, z = w
@@ -29,7 +29,7 @@ r.set_integrator('dopri5')
 r.set_initial_value(w0,t0)
 
 #tiempo conveniente
-t=np.linspace(t0,10,100)
+t=np.linspace(t0,100,10000)
 #vectores de info a guardar
 x=np.zeros(len(t))
 y=np.zeros(len(t))
@@ -40,10 +40,14 @@ for i in range(len(t)):
     r.integrate(t[i])
     x[i], y[i], z[i] = r.y
 
+
 ax.plot(x, y, z)
 
 ax.set_xlabel('x')
 ax.set_ylabel('y')
 ax.set_zlabel('z')
+plt.title("Atractor de Lorenz")
 
+plt.draw()
 plt.show()
+plt.savefig('figura2.png')
