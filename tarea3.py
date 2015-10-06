@@ -6,10 +6,8 @@ fig = plt.figure(1)
 fig.clf()
 
 ax1 = fig.add_subplot(111)
-ax1.set_xlabel('t')
-ax1.set_ylabel('x')
-
-
+ax1.set_xlabel('x')
+ax1.set_ylabel('v')
 
 
 K=1.232  #rut 18769232-6
