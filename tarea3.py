@@ -2,14 +2,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-fig = plt.figure(1)
-fig.clf()
-
-ax1 = fig.add_subplot(111)
-ax1.set_xlabel('x')
-ax1.set_ylabel('v')
-
-
 K=1.232  #rut 18769232-6
 
 def f_a_integrar(x,v,k=K):
@@ -42,19 +34,65 @@ def rk3_step(xn,vn,h,f_a_integrar):
 
 N_steps = np.int(1e5)
 h=20*np.pi/N_steps
-x= np.zeros(N_steps)
-v= np.zeros(N_steps)
+x1= np.zeros(N_steps)
+v1= np.zeros(N_steps)
+x2= np.zeros(N_steps)
+v2= np.zeros(N_steps)
+t=np.linspace(0,20*np.pi,N_steps)
 
-x[0]= 0.1
-v[0]= 0
+fig = plt.figure(1)
+fig.clf()
 
+ax1 = fig.add_subplot(211)
+ax1.set_xlabel('y')
+ax1.set_ylabel('dy/ds')
+ax1.set_xlim(-3,4)
+plt.title("Trayectoria en espacio (y,dy/ds) oscilado de Van der Pool")
+
+#primeras condiciones iniciales
+x1[0]= 0.1
+v1[0]= 0
 for i in range (1, N_steps):
-    x_new, v_new = rk3_step(x[i-1],v[i-1],h,f_a_integrar)
-    x[i]= x_new
-    v[i]= v_new
+    x_new, v_new = rk3_step(x1[i-1],v1[i-1],h,f_a_integrar)
+    x1[i]= x_new
+    v1[i]= v_new
+ax1.plot(x1,v1, label="Condiciones iniciales: y=0.1, dy/ds=0", color='r')
+plt.legend(loc='lower right', fontsize=10)
 
-ax1.plot(x,v)
+ax2 = fig.add_subplot(212)
+ax2.set_xlabel('y')
+ax2.set_ylabel('dy/ds')
+
+#segundas condiciones iniciales
+x2[0]= 4
+v2[0]= 0
+for i in range (1, N_steps):
+    x_new, v_new = rk3_step(x2[i-1],v2[i-1],h,f_a_integrar)
+    x2[i]= x_new
+    v2[i]= v_new
+ax2.plot(x2,v2, label="Condiciones iniciales: y=4, dy/ds=0")
+
+plt.legend(loc='lower right', fontsize=10)
+plt.draw()
+plt.savefig('figura1.1.png')
+plt.show()
+
+####
+fig = plt.figure(2)
+fig.clf()
+ax3=fig.add_subplot(211)
+plt.title("y(s) para condiciones iniciales: y=0.1 , dy/ds=0")
+plt.plot(t,x1,color='r')
+ax3.set_ylabel('y(s)')
+ax3.set_ylim(-4,4)
+
+ax4=fig.add_subplot(212)
+plt.title("y(s) para condiciones iniciales: y=4 , dy/ds=0")
+plt.plot(t,x2)
+ax4.set_xlabel('s')
+ax4.set_ylabel('y(s)')
+
 
 plt.draw()
-plt.savefig('figura1.png')
+plt.savefig('figura1.2.png')
 plt.show()
