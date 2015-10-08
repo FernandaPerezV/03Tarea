@@ -3,6 +3,13 @@ import matplotlib.pyplot as plt
 from scipy.integrate import ode
 from mpl_toolkits.mplot3d import Axes3D
 
+'''Este scrip resuelve el sistema de Lorenz para
+el caso en que sigma=10, beta=8/3, rho=20 (atractor de lorenz).
+Se utiliza runge-kutta de orden 4 con metodo dopri5
+de la libreria scipy.integrate.
+Utiliza condiciones iniciales x0=1,y0=1,z0=1.
+Finalmente grafica x(t),y(t),z(t) en 3D.
+'''
 #parametros a usar
 sigma= 10
 beta= 8/3.
@@ -19,6 +26,7 @@ fig.clf()
 ax = fig.add_subplot(111, projection='3d')
 ax.set_aspect('auto')
 
+#definimos la funcion a integrar
 def f_a_integrar(t,w,s=sigma,r=rho,b=beta):
     x, y, z = w
     return [s*(y-x), x*(r-z)-y, x*y-b*z]
@@ -30,7 +38,8 @@ r.set_initial_value(w0,t0)
 
 #tiempo conveniente
 t=np.linspace(t0,100,10000)
-#vectores de info a guardar
+
+#vectores para guardar la informacion
 x=np.zeros(len(t))
 y=np.zeros(len(t))
 z=np.zeros(len(t))

@@ -1,9 +1,15 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-
+'''Este script resuelve el oscilador de
+Van der Pool, utilizando el metodo de runge-kutta
+de orden 3. Se utilizan dos sets de condiciones
+iniciales: 1) dy/ds=0, y=0.1 ;2) dy/ds=0 , y=4.
+Finalmente grafica (y vs dy/dy) y (y(s) vd s).
+'''
 K=1.232  #rut 18769232-6
 
+#definimos las funciones a utilizar para RK3
 def f_a_integrar(x,v,k=K):
     return [v, -x-k*(x**2-1)*v]
 
@@ -34,6 +40,8 @@ def rk3_step(xn,vn,h,f_a_integrar):
 
 N_steps = np.int(1e5)
 h=20*np.pi/N_steps
+
+#creamos los arrays en que se guardara la informacion
 x1= np.zeros(N_steps)
 v1= np.zeros(N_steps)
 x2= np.zeros(N_steps)
